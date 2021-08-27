@@ -114,6 +114,7 @@ app.delete('/movies/:ID', (req, res) => {
     return movie.id === req.params.id;
   })
   if (movie) {
+    movie.id = parseInt(req.params.id)
     topMovies =topMovies.filter((obj) => {
       return obj.id !== req.params.id});
       res.status(201).send('Movie with the ID ' + req.params.id + ' was deleted.');
@@ -129,7 +130,7 @@ app.put('/movies/:title/:year', (req, res) => {
   });
   if (movie) {
     movie.year = parseInt(req.params.year);
-    res.status(201).send('Movie ${req.params.title} was assigned the year of ${req.params.year}.');
+    res.status(201).send('Movie with the title '  + req.params.title + ' was assigned the year ' + req.params.year);
   } else {
     res.status(404).send('Movie with the title '  + req.params.title + ' was not found.');
   };
