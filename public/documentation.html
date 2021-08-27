@@ -64,18 +64,71 @@
         </td>
       </tr>
       <tr>
-        <td>Remove a movie by ID</td>
-        <td>/movies/[ID]</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>A text message indicating whether the movie was successfully removed</td>
-      </tr>
-      <tr>
         <td>Update the year of a certain movie</td>
-        <td>/movies/[title]/[year]</td>
+        <td>/movies/:[title]/:[year]</td>
         <td>PUT</td>
         <td>None</td>
         <td>A text message indicating whether the year of the certain movie was updated</td>
+      </tr>
+      <tr>
+        <td>Get data about a genre by name/title</td>
+        <td>/movies/genres/:[genre]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A text message indicating whether the movie genre is successfully shown</td>
+      </tr>
+      <tr>
+        <td>Get data about a director</td>
+        <td>/movies/directors/:[director]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A text message indicating whether the movie director is successfully shown</td>
+      </tr>
+      <tr>
+        <td>Allow a new user to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>
+          A JSON object holding data about the user, <br>
+          Example:<br>
+          {<br>
+            username: 'katymovies',<br>
+            password: '1234'<br>
+          }
+        </td>
+        <td>
+          A JSON object holding a message saying the user information was added:<br>
+          <br>
+            User profile successfully created.
+        </td>
+      </tr>
+      <tr>
+        <td>Allow user to update their information</td>
+        <td>/users/:[username]</td>
+        <td>PUT</td>
+        <td>None</td>
+        <td>A text message indicating the profile information was succcessfully updated</td>
+      </tr>
+      <tr>
+        <td>Allow user to add a movie to their list</td>
+        <td>/users/:[username]/favorites</td>
+        <td>POST</td>
+        <td>*NEED TO ADD INFO*</td>
+        <td>*NEED TO ADD INFO*</td>
+      </tr>
+      <tr>
+        <td>Allow user to remove a movie from their list</td>
+        <td>/users/:[username]/favorites/:[title]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating the movie was removed from their list</td>
+      </tr>
+      <tr>
+        <td>Allow user to deregister</td>
+        <td>/users/:[username]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating the user successfully deregistered</td>
       </tr>
     </tbody>
   </table>
