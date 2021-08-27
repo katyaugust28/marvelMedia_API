@@ -64,33 +64,36 @@ let topMovies =[
   }
 ]
 
+
+//Returning a welcome message
+app.get('/', (req, res) => {
+  res.send('Welcome to Marvel Media!');
+});
+
 //Returning the top movies
 app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
-//Returning a welcome message
-app.get('/', (req, res) => {
-  res.send('Welcome to my Marvel Media!');
-});
-
 //Get data about a single movie
-app.get('/movies/[title]', (req, res) => {
-  res.send('Successful GET request returning data on a single movie');
+app.get('/movies/:title', (req, res) => {
+  res.json(topMovies.find((movie) => {
+    return movies.title === req.params.title;
+  }));
 });
 
-//Add a movie
+//Add a movie to their list
 app.post('/movies/', (req, res) => {
   res.send('Successful POST request adding a new movie to the collection');
 });
 
-//Remove a movie by ID
-app.delete('/movies/[ID]', (req, res) => {
+//Remove a movie by ID to their list
+app.delete('/movies/:ID', (req, res) => {
   res.send('Successful DELETE request removing a movie by using its ID');
 });
 
 //Update the year of a movie by Title
-app.put('/movies/[title]/[year]', (req, res) => {
+app.put('/movies/:title/:year', (req, res) => {
   res.send('Successful PUT request updating the year of a certain movie');
 });
 
