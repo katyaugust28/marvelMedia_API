@@ -7,74 +7,102 @@ app.use(morgan('common'));
 
 let topMovies =[
   {
-    id: '1',
     title: 'Iron Man',
-    year: '2008'
+    year: '2008',
+    genre: 'Action',
+    director: 'Jon Favreau',
+    description:'adding later'
   },
   {
-    id: '2',
     title: 'Iron Man 2',
-    year: '2010'
+    year: '2010',
+    genre: 'Action',
+    director: 'Jon Favreau',
+    description:'adding later'
   },
   {
-    id: '3',
     title:'Thor',
-    year: '2011'
+    year: '2011',
+    genre: 'Action',
+    director: 'Kenneth Branagh',
+    description:'adding later'
   },
   {
-    id: '4',
     title: 'Captain America: The First Avenger',
-    year: '2011'
+    year: '2011',
+    genre: 'Action',
+    director: 'Joe Johnston',
+    description:'adding later'
   },
   {
-    id: '5',
     title: 'The Incredibel Hulk',
-    year: '2008'
+    year: '2008',
+    genre: 'Action',
+    director: 'Lewis Laterrier',
+    description:'adding later'
   },
   {
-    id: '6',
     title: 'The Avengers',
-    year: '2012'
+    year: '2012',
+    genre: 'Action',
+    director: 'Joss Whedon',
+    description:'adding later'
   },
   {
-    id: '7',
     title: 'Iron Man 3',
-    year: '2013'
+    year: '2013',
+    genre: 'Action',
+    director: 'Shane Black',
+    description:'adding later'
   },
   {
-    id: '8',
     title: 'Thor: The Dark World',
-    year: '2013'
+    year: '2013',
+    genre: 'Action',
+    director: 'Alan Taylor',
+    description:'adding later'
   },
   {
-    id: '9',
     title: 'Captain America: The Winter Soldier',
-    year: '2014'
+    year: '2014',
+    genre: 'Action',
+    director: 'Joe Russo & Anthony Russo',
+    description:'adding later'
   },
   {
-    id: '10',
     title: 'Guardians of the Galaxy',
-    year: '2014'
+    year: '2014',
+    genre: 'Action',
+    director: 'James Gunn',
+    description:'adding later'
   },
   {
-    id: '11',
     title: 'Avengers: Age of Ultron',
-    year: '2015'
+    year: '2015',
+    genre: 'Action',
+    director: 'Joss Whedon',
+    description:'adding later'
   },
   {
-    id: '12',
     title: 'Ant-Man',
-    year: '2015'
+    year: '2015',
+    genre: 'Action',
+    director: 'Peyton Reed',
+    description:'adding later'
   },
   {
-    id: '13',
     title: 'Captain America: Civil War',
-    year: '2016'
+    year: '2016',
+    genre: 'Action',
+    director: 'Joe Russo & Anthony Russo',
+    description:'adding later'
   },
   {
-    id: '14',
     title: 'Doctor Strange',
-    year: '2016'
+    year: '2016',
+    genre: 'Action',
+    director: 'Scott Derrickson',
+    description:'adding later'
   }
 ]
 
@@ -108,21 +136,6 @@ app.post('/movies/', (req, res) => {
   }
 });
 
-//Remove a movie by ID
-app.delete('/movies/:ID', (req, res) => {
-  let movie= topMovies.find((movie) => {
-    return movie.id === req.params.id;
-  })
-  if (movie) {
-    movie.id = parseInt(req.params.id)
-    topMovies =topMovies.filter((obj) => {
-      return obj.id !== req.params.id});
-      res.status(201).send('Movie with the ID ' + req.params.id + ' was deleted.');
-  } else {
-    res.status(404).send('Movie with the ID ' + req.params.id + ' was not found.')
-  }
-});
-
 //Update the year of a movie by title
 app.put('/movies/:title/:year', (req, res) => {
   let movie = topMovies.find((movie) => {
@@ -137,6 +150,41 @@ app.put('/movies/:title/:year', (req, res) => {
 });
 
 app.use(express.static('public'));
+
+//Get data about a genre by name/title
+app.get("/movies/genres/:genre", (req,res) => {
+  res.send("Successful GET request returning a description of the genre.");
+});
+
+//Get data about a director
+app.get("/movies/directors/:director" , (req,res) => {
+  res.send("Successful GET request returning a description of the director.")
+});
+
+//Allow new user to register
+app.post("/users", (req, res) => {
+  res.send("Registration was successful!");
+});
+​
+//Allow user to update their information
+app.put("/users/:username", (req, res) => {
+  res.send("Your profile was successfully updated.");
+});
+​
+//Allow user to add a movie to their list
+app.post("/users/:username/favorites", (req, res) => {
+  res.send(req.params.title + " was added to favorites.");
+});
+​
+//Alow user to remove a movie from their list
+app.delete("/users/:username/favorites/:title", (req, res) => {
+  res.send(req.params.title + " was removed from favorites.");
+});
+​
+//Allow user to deregister
+app.delete("/users/:username", (req, res) => {
+  res.send("Your account has been successfully removed");
+});
 
 
 //error-handling middleware
