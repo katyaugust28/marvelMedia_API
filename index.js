@@ -35,7 +35,7 @@ let topMovies =[
     description:'Steve Rogers, a rejected military soldier, transforms into Captain America after taking a dose of a "Super-Soldier serum". But being Captain America comes at a price as he attempts to take down a war monger and a terrorist organization.'
   },
   {
-    title: 'The Incredibel Hulk',
+    title: 'The Incredible Hulk',
     year: '2008',
     genre: 'Action',
     director: 'Lewis Laterrier',

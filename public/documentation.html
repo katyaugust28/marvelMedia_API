@@ -50,17 +50,36 @@
           A JSON object holding data about the movie to add, <br>
           Example:<br>
           {<br>
-            title: 'Iron Man 2',<br>
-            year: '2010'<br>
+            Title: 'Iron Man 2',<br>
+            Year: '2010',<br>
+            Description: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",<br>
+            Genre: ObjectId("612eb4993eb8d4c5112b26e3"),<br>
+            Director: {<br>
+		            Name: "Jon Favreau",<br>
+		            Bio: "An American actor, director, producer, and screenwriter. Directed both 'Iron Man' and 'Iron Man 2'.",<br>
+		            Birth: "1966"<br>
+	          },<br>
+	          ImagePath: "ironman.jpg",<br>
+	          Featured: false,<br>
           }
         </td>
         <td>
           A JSON object holding data about the movie that was added, including an ID:<br>
           {<br>
-            id: 2,
-            title: 'Iron Man 2',<br>
-            year: '2010'<br>
-          }
+            _id: ObjectId("612ea71c3ab0f0b1c8d662f7"),<br>
+            {<br>
+              Title: 'Iron Man 2',<br>
+              Year: '2010',<br>
+              Description: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",<br>
+              Genre: ObjectId("612eb4993eb8d4c5112b26e3"),<br>
+              Director: {<br>
+  		            Name: "Jon Favreau",<br>
+  		            Bio: "An American actor, director, producer, and screenwriter. Directed both 'Iron Man' and 'Iron Man 2'.",<br>
+  		            Birth: "1966"<br>
+  	          },<br>
+  	          ImagePath: "ironman.jpg",<br>
+  	          Featured: false,<br>
+            }
         </td>
       </tr>
       <tr>
@@ -71,7 +90,7 @@
         <td>A text message indicating whether the year of the certain movie was updated</td>
       </tr>
       <tr>
-        <td>Get data about a genre by name/title</td>
+        <td>Get data about a genre by name</td>
         <td>/movies/genres/:[genre]</td>
         <td>GET</td>
         <td>None</td>
@@ -93,7 +112,9 @@
           Example:<br>
           {<br>
             username: 'katymovies',<br>
-            password: '1234'<br>
+            password: '1234',<br>
+            email: 'katy@gmail.com',<br>
+            birthday: '1992-12-28'<br>
           }
         </td>
         <td>
@@ -113,8 +134,10 @@
         <td>Allow user to add a movie to their list</td>
         <td>/users/:[username]/favorites</td>
         <td>POST</td>
-        <td>*NEED TO ADD INFO*</td>
-        <td>*NEED TO ADD INFO*</td>
+        <td>{
+          FavoriteMovies: ObjectId("612ec46c3eb8d4c5112b26ec")
+        }</td>
+        <td>A text message indicating they added a movie to their favorites list</td>
       </tr>
       <tr>
         <td>Allow user to remove a movie from their list</td>
