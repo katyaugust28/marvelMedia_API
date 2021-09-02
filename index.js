@@ -1,8 +1,18 @@
-const express = require("express"),
-  morgan = require('morgan');
+const express = require('express'),
+  morgan = require('morgan'),
+  mongoose = require('mongoose'),
+  Models = require('./models.js'),
+  Movies = Models.Movie,
+  Users = Models.User,
+  Genres = Models.Genre,
+  bodyParser = require('body-parser');
+
+mongoose.connect('mongodb://localhost:27017/mavelMediaDB', { useNewURLParser: true, useUnifiedTopology: true});
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ Extended: true}));
 app.use(morgan('common'));
 
 let topMovies =[
@@ -163,7 +173,29 @@ app.get("/movies/directors/:director" , (req,res) => {
 
 //Allow new user to register
 app.post("/users", (req, res) => {
-  res.send("Registration was successful!");
+  //Checks if the username already exists
+  Users.findOne({ Username: req.body.Username}).then ((user) => {
+    if (user) {
+      return res.status(400).send(req.body.Username + 'already exists');
+    } else {
+      Users
+      .create({ //collect all info from the HTTP request body, use Mongoose to populate a user doc, then add it to the db
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      })
+      .then ((user) => {res.status(201).json(user)})
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 ​
 //Allow user to update their information
