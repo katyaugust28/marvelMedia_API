@@ -29,16 +29,24 @@
       </tr>
       <tr>
         <td>Get data about a single movie by name</td>
-        <td>/movies/[title]</td>
+        <td>/movies/:[title]</td>
         <td>GET</td>
         <td>None</td>
         <td>
           A JSON object holding data about a single movie,<br>
           Example: <br>
           {<br>
-            id: 1,<br>
-            title: 'Iron Man',<br>
-            year: '2008'<br>
+            Title: 'Iron Man',<br>
+            Description: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',<br>
+            Genre: ObjectId("612fa35a6a9948b3f42de17f"),<br>
+            Director: {<br>
+                Name: Jon Favreau,<br>
+                Bio: 'An American actor, director, producer, and screenwriter.',<br>
+                Birthyear: '1966'<br>
+            },<br>
+            Superheroes: 'Iron Man',<br>
+            ImagePath: 'ironman.jpg',<br>
+            Featured: true<br>
           }
         </td>
       </tr>
@@ -50,36 +58,35 @@
           A JSON object holding data about the movie to add, <br>
           Example:<br>
           {<br>
-            Title: 'Iron Man 2',<br>
-            Year: '2010',<br>
-            Description: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",<br>
-            Genre: ObjectId("612eb4993eb8d4c5112b26e3"),<br>
+            Title: 'Iron Man',<br>
+            Description: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',<br>
+            Genre: ObjectId("612fa35a6a9948b3f42de17f"),<br>
             Director: {<br>
-		            Name: "Jon Favreau",<br>
-		            Bio: "An American actor, director, producer, and screenwriter. Directed both 'Iron Man' and 'Iron Man 2'.",<br>
-		            Birth: "1966"<br>
-	          },<br>
-	          ImagePath: "ironman.jpg",<br>
-	          Featured: false,<br>
+                Name: Jon Favreau,<br>
+                Bio: 'An American actor, director, producer, and screenwriter.',<br>
+                Birthyear: '1966'<br>
+            },<br>
+            Superheroes: 'Iron Man',<br>
+            ImagePath: 'ironman.jpg',<br>
+            Featured: true<br>
           }
         </td>
         <td>
           A JSON object holding data about the movie that was added, including an ID:<br>
           {<br>
             _id: ObjectId("612ea71c3ab0f0b1c8d662f7"),<br>
-            {<br>
-              Title: 'Iron Man 2',<br>
-              Year: '2010',<br>
-              Description: "After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.",<br>
-              Genre: ObjectId("612eb4993eb8d4c5112b26e3"),<br>
-              Director: {<br>
-  		            Name: "Jon Favreau",<br>
-  		            Bio: "An American actor, director, producer, and screenwriter. Directed both 'Iron Man' and 'Iron Man 2'.",<br>
-  		            Birth: "1966"<br>
-  	          },<br>
-  	          ImagePath: "ironman.jpg",<br>
-  	          Featured: false,<br>
-            }
+            Title: 'Iron Man',<br>
+            Description: 'After being held captive in an Afghan cave, billionaire engineer Tony Stark creates a unique weaponized suit of armor to fight evil.',<br>
+            Genre: ObjectId("612fa35a6a9948b3f42de17f"),<br>
+            Director: {<br>
+                Name: Jon Favreau,<br>
+                Bio: 'An American actor, director, producer, and screenwriter.',<br>
+                Birthyear: '1966'<br>
+            },<br>
+            Superheroes: 'Iron Man',<br>
+            ImagePath: 'ironman.jpg',<br>
+            Featured: true<br>
+          }
         </td>
       </tr>
       <tr>
@@ -94,14 +101,21 @@
         <td>/movies/genres/:[genre]</td>
         <td>GET</td>
         <td>None</td>
-        <td>A text message indicating whether the movie genre is successfully shown</td>
+        <td>{<br>
+          Name: 'Action',<br>
+          Description: 'A motion picture whose storyline involves fast-paced activity and conflict, usually including a heroic protagonist, violent fights, acrobatic stunts, and chase scenes.'<br>
+        }</td>
       </tr>
       <tr>
         <td>Get data about a director</td>
         <td>/movies/directors/:[director]</td>
         <td>GET</td>
         <td>None</td>
-        <td>A text message indicating whether the movie director is successfully shown</td>
+        <td>{<br>
+            Name: Jon Favreau,<br>
+            Bio: 'An American actor, director, producer, and screenwriter.',<br>
+            Birthyear: '1966'<br>
+        }</td>
       </tr>
       <tr>
         <td>Allow a new user to register</td>
@@ -117,25 +131,39 @@
             birthday: '1992-12-28'<br>
           }
         </td>
-        <td>
-          A JSON object holding a message saying the user information was added:<br>
-          <br>
-            User profile successfully created.
+        <td>User profile successfully created.{<br>
+          _id : ObjectId("612fbd006a9948b3f42de190"),<br>
+          username: 'katymovies',<br>
+          password: '1234',<br>
+          email: 'katy@gmail.com',<br>
+          birthday: '1992-12-28'<br>
+        }<br>
         </td>
       </tr>
       <tr>
         <td>Allow user to update their information</td>
-        <td>/users/:[username]</td>
+        <td>/users/:[Username]</td>
         <td>PUT</td>
-        <td>None</td>
-        <td>A text message indicating the profile information was succcessfully updated</td>
+        <td>{<br>
+          username: 'katymovies',<br>
+          password: '1234',<br>
+          email: 'katy@gmail.com',<br>
+          birthday: '1992-12-28'<br>
+        }</td>
+        <td>User profile successfully updated.{<br>
+          _id : ObjectId("612fbd006a9948b3f42de190"),<br>
+          username: 'katymovies',<br>
+          password: '1234',<br>
+          email: 'katy@gmail.com',<br>
+          birthday: '1992-12-28'<br>
+        }<br></td>
       </tr>
       <tr>
         <td>Allow user to add a movie to their list</td>
         <td>/users/:[username]/favorites</td>
         <td>POST</td>
-        <td>{
-          FavoriteMovies: ObjectId("612ec46c3eb8d4c5112b26ec")
+        <td>{<br>
+          FavoriteMovies: ObjectId("612ec46c3eb8d4c5112b26ec")<br>
         }</td>
         <td>A text message indicating they added a movie to their favorites list</td>
       </tr>
@@ -143,14 +171,16 @@
         <td>Allow user to remove a movie from their list</td>
         <td>/users/:[username]/favorites/:[title]</td>
         <td>DELETE</td>
-        <td>None</td>
+        <td>{<br>
+          FavoriteMovies: ObjectId("612ec46c3eb8d4c5112b26ec")<br>
+        }</td>
         <td>A text message indicating the movie was removed from their list</td>
       </tr>
       <tr>
         <td>Allow user to deregister</td>
-        <td>/users/:[username]</td>
+        <td>/users/:[Username]</td>
         <td>DELETE</td>
-        <td>None</td>
+        <td>username: 'katymovies',</td>
         <td>A text message indicating the user successfully deregistered</td>
       </tr>
     </tbody>
