@@ -64,21 +64,6 @@ app.post('/movies/', (req, res) => {
   }
 });
 
-//Update the year of a movie by title
-app.put('/movies/:title/:year', (req, res) => {
-  let movie = topMovies.find((movie) => {
-    return movie.title = req.params.title;
-  });
-  if (movie) {
-    movie.year = parseInt(req.params.year);
-    res.status(201).send('Movie with the title '  + req.params.title + ' was assigned the year ' + req.params.year);
-  } else {
-    res.status(404).send('Movie with the title '  + req.params.title + ' was not found.');
-  };
-});
-
-app.use(express.static('public'));
-
 //Get data about a genre by name/title
 app.get("/movies/genres/:genre", (req,res) => {
   Genres.findOne({ Name: req.params.Name})
