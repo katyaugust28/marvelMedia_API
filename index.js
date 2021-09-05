@@ -12,9 +12,13 @@ mongoose.connect('mongodb://localhost:27017/marvelMediaDB', { useNewURLParser: t
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ Extended: true}));
 app.use(morgan('common'));
 
+let auth = require('./auth')(app); //ensures Express is available in auth.js file
+const passport = require('passport');
+require('./passport');
 
 //Return a welcome message
 app.get('/', (req, res) => {
@@ -34,7 +38,7 @@ app.get('/movies/featured', (req, res) => {
 })
 
 //Return a list of all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false}), (req, res) => {
   Movies.find()
   .then ((movies) => {
     res.status(201).json(movies);
