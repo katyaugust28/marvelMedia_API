@@ -20,7 +20,8 @@ app.use(morgan('common'));
 
 const cors = require('cors');
 let allowedOrigins= ['https://localhost:8080','http://testsite.com'];
-app.use(cors({
+app.use(cors());
+/*  {
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1) {
@@ -29,7 +30,7 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));
+}));*/
 
 let auth = require('./auth')(app); //ensures Express is available in auth.js file
 const passport = require('passport');
