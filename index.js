@@ -8,7 +8,7 @@ const express = require('express'),
   bodyParser = require('body-parser');
 
 //mongoose.connect('mongodb://localhost:27017/marvelMediaDB', { useNewURLParser: true, useUnifiedTopology: true});
-mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true});
+mongoose.connect('process.env.CONNECTION_URI', { useNewURLParser: true, useUnifiedTopology: true});
 
 const app = express();
 const { check, validationResult} = require('express-validator');
@@ -107,7 +107,7 @@ app.post("/users",
   check('Username', 'Username contains non alphanumeric characters- not allowed').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()
-], passport.authenticate('jwt', { session: false}), (req, res) => {
+], (req, res) => {
 
   let errors = validationResult(req);
 
