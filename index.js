@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.use(morgan('common'));
 
 const cors = require('cors');
-let allowedOrigins= ['https://localhost:8080','http://testsite.com'];
+//let allowedOrigins= ['https://localhost:8080','http://testsite.com'];
 app.use(cors());
 /*  {
   origin: (origin, callback) => {
@@ -116,7 +116,7 @@ app.post("/users",
     return res.status(422).json({ errors: errors.array() });
   }
 
-  let hashedPassword = Users.hashedPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username}).then ((user) => {
     if (user) {
       return res.status(400).send(req.body.Username + 'already exists');
