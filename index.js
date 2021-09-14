@@ -7,9 +7,10 @@ const express = require('express'),
   Genres = Models.Genre,
   bodyParser = require('body-parser');
 
-
 //mongoose.connect('mongodb://localhost:27017/marvelMediaDB', { useNewURLParser: true, useUnifiedTopology: true});
-mongoose.connect('mongodb+srv://kaugust:ilove2code@marvelmediadb.gxqnq.mongodb.net/marvelMediaDB?retryWrites=true&w=majority', { useNewURLParser: true, useUnifiedTopology: true});
+// mongoose.connect('mongodb+srv://kaugust:ilove2code@marvelmediadb.gxqnq.mongodb.net/marvelMediaDB?retryWrites=true&w=majority', { useNewURLParser: true, useUnifiedTopology: true});
+console.log(process.env.CONNECTION_URI)
+mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true});
 
 const app = express();
 const { check, validationResult} = require('express-validator');
