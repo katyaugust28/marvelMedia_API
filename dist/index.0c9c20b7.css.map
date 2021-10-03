@@ -1,0 +1,1 @@
+{"mappings":";ACEA;EACI,OAHI","sources":["src/components/login-view/login-view.scss","src/index.scss"],"sourcesContent":[null,"$color: steelblue;\n\n.marvel-media {\n    color: $color;\n}"],"names":[],"version":3,"file":"index.0c9c20b7.css.map","sourceRoot":"/__parcel_source_root/"}
