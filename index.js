@@ -19,18 +19,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 
 const cors = require('cors');
-//let allowedOrigins= ['https://localhost:8080','http://testsite.com'];
+//let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
 app.use(cors());
-/*  {
+/*{
   origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1) {
-      let message= "The CORS policy for this application doesn't allow access from origin " + origin;
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      let message = "The CORS policy for this application doesn't allow access from origin " + origin;
       return callback(new Error(message), false);
     }
     return callback(null, true);
   }
-}));*/
+};*/
 
 let auth = require('./auth')(app); //ensures Express is available in auth.js file
 const passport = require('passport');
@@ -56,10 +56,10 @@ app.get('/movies/featured', passport.authenticate('jwt', { session: false }), (r
 //Return a list of all movies
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
-    .then(function (movies) => {
+    .then((movies) => {
       res.status(201).json(movies);
     })
-    .catch(function (err) => {
+    .catch((err) => {
       console.error(err);
       res.status(500).send('Error: ' + error);
     });
