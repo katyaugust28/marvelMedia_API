@@ -7,7 +7,6 @@ const express = require('express'),
   Genres = Models.Genre,
   bodyParser = require('body-parser');
 
-//mongoose.connect('mongodb://localhost:27017/marvelMediaDB', { useNewURLParser: true, useUnifiedTopology: true});
 mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true });
 
 const app = express();
@@ -19,18 +18,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 
 const cors = require('cors');
-//let allowedOrigins = ['https://localhost:8080', 'http://testsite.com'];
+
 app.use(cors());
-/*{
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      let message = "The CORS policy for this application doesn't allow access from origin " + origin;
-      return callback(new Error(message), false);
-    }
-    return callback(null, true);
-  }
-};*/
 
 let auth = require('./auth')(app); //ensures Express is available in auth.js file
 const passport = require('passport');
@@ -88,6 +77,20 @@ app.get("/movies/genres/:Id", passport.authenticate('jwt', { session: false }), 
       res.status(500).send("Error: " + err);
     });
 });
+
+//Get data about a genre by name/title
+app.get("/movies/genres", passport.authenticate('jwt', { session: false }), (req, res) => {
+  Genres.findOne()
+    .then((genre) => {
+      res.json(genre);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+
 
 //Get data about a director
 app.get("/movies/directors/:Name", passport.authenticate('jwt', { session: false }), (req, res) => {
