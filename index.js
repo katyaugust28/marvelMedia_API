@@ -66,31 +66,17 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
     });
 });
 
-//Get data about a genre by name/title
-app.get("/movies/genres/:Id", passport.authenticate('jwt', { session: false }), (req, res) => {
-  Genres.findOne({ _id: req.body.Id })
-    .then((genre) => {
-      res.json(genre);
+//Get data about a genre by name
+app.get("/movies/genres/:Name", passport.authenticate('jwt', { session: false }), (req, res) => {
+  Movies.findOne({ "Genre.Name": req.body.Name })
+    .then((movies) => {
+      res.json(movies.Genre);
     })
     .catch((err) => {
       console.error(err);
       res.status(500).send("Error: " + err);
     });
 });
-
-//Get data about a genre by name/title
-app.get("/movies/genres", passport.authenticate('jwt', { session: false }), (req, res) => {
-  Genres.find()
-    .then((genre) => {
-      res.json(genre);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
-
-
 
 //Get data about a director
 app.get("/movies/directors/:Name", passport.authenticate('jwt', { session: false }), (req, res) => {
